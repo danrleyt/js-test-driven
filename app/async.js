@@ -4,7 +4,13 @@ if (typeof define !== 'function') {
 
 define(['jquery'], function($) {
   return {
-    async: function(value) {},
+    async: function(value) {
+      return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          resolve(value);
+        }, 10);
+      });
+    },
 
     manipulateRemoteData: function(url) {
       return new Promise(function(resolve, reject) {

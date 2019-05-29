@@ -5,7 +5,7 @@ if (typeof define !== 'function') {
 define(function() {
   return {
     valueAtBit: function(num, bit) {
-      return num.toString(2)[bit];
+      return 1 & (num >> (bit - 1));
     },
 
     base10: function(str) {
@@ -13,7 +13,11 @@ define(function() {
     },
 
     convertToBinary: function(num) {
-      return parseInt(num.toString(), 2);
+      let arr = [];
+      for (let i = 7; i > -1; i--) {
+        arr.push(num & (1 << i) ? 1 : 0);
+      }
+      return arr.join('');
     },
 
     multiply: function(a, b) {
