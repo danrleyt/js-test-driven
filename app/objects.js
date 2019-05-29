@@ -5,14 +5,20 @@ if (typeof define !== 'function') {
 define(function() {
   return {
     alterContext: function(fn, obj) {
-      this.name = obj.name;
-      this.greeting = obj.greeting;
       obj.sayIt = fn;
       return obj.sayIt();
     },
 
-    alterObjects: function(constructor, greeting) {},
+    alterObjects: function(constructor, greeting) {
+      constructor.prototype.greeting = greeting;
+    },
 
-    iterate: function(obj) {}
+    iterate: function(obj) {
+      let props = [];
+      for (let prop of Object.getOwnPropertyNames(obj)) {
+        props.push(`${prop}: ${obj[prop]}`);
+      }
+      return props;
+    }
   };
 });
