@@ -1,8 +1,9 @@
-if (typeof define !== 'function') { var define = require('amdefine')(module); }
+if (typeof define !== 'function') {
+  var define = require('amdefine')(module);
+}
 
-define(function () {
+define(function() {
   return {
-    count : function (start, end) {
-    }
+    count: function(start, end) {}
   };
 });

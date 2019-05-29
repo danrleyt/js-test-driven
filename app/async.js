@@ -1,13 +1,31 @@
-if (typeof define !== 'function') { var define = require('amdefine')(module); }
+if (typeof define !== 'function') {
+  var define = require('amdefine')(module);
+}
 
-define([ 'jquery' ], function($) {
+define(['jquery'], function($) {
   return {
-    async : function(value) {
+    async: function(value) {},
 
-    },
+    manipulateRemoteData: function(url) {
+      return new Promise(function(resolve, reject) {
+        $.get(url).then(function(data) {
+          let names = [];
+          let sorted = data.people.sort((a, b) => {
+            if (a.name > b.name) {
+              return 1;
+            }
+            if (a.name < b.name) {
+              return -1;
+            }
+            return 0;
+          });
 
-    manipulateRemoteData : function(url) {
-
+          for (let p of sorted) {
+            names.push(p.name);
+          }
+          resolve(names);
+        });
+      });
     }
   };
 });
